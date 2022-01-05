@@ -16,6 +16,7 @@
 		<%
 		StockQuantity stockquantity = (StockQuantity) request.getAttribute("StockQuantity");
 		InvestmentPortfolio investmentPortfolio = new InvestmentPortfolio(stockquantity);
+		CountryDiversification countryDiversification = new CountryDiversification(investmentPortfolio); 
 		%>
 	
 		<h1>Country Diversification</h1>
@@ -59,8 +60,6 @@
 			 	<td colspan="3" align="right"> <%=Unifier.doubleToMoney(investmentPortfolio.getSum())%></td>
 			 </tr>
 		</table>
-		
-		<% CountryDiversification countryDiversification = new CountryDiversification(investmentPortfolio); %>
 		
 		<br>
 		
