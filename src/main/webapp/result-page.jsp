@@ -10,15 +10,50 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>DiversificationApp</title>
-		<style><%@include file="/css/style.css"%></style>
-	</head>
-	<body>
+		
+		<style><%@include file="css/style.css"%></style>
+		
 		<%
 		StockQuantity stockquantity = (StockQuantity) request.getAttribute("StockQuantity");
 		InvestmentPortfolio investmentPortfolio = new InvestmentPortfolio(stockquantity);
 		CountryDiversification countryDiversification = new CountryDiversification(investmentPortfolio); 
 		%>
-	
+		
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.canvaswrapper.js"></script>
+		<script type="text/javascript" src="js/jquery.colorhelpers.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.saturated.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.browser.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.drawSeries.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.uiConstants.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.legend.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.pie.js"></script>
+		<script type="text/javascript">
+		$(function() {
+			var data = [
+				<%
+				for (Map.Entry<Country, Double> entry : countryDiversification.getEntrySet()) {
+					out.println("{ label: \"" + entry.getKey() + "\",  data: " + entry.getValue() + "},");
+				}
+				%>
+			];
+
+			var piechart = $("#piechart");
+			
+			$.plot(piechart, data, {
+				series: {
+					pie: {
+						innerRadius: 0.5,
+						show: true
+					}
+				}
+			});
+
+		});
+		</script>
+	</head>
+	<body>
 		<h1>Country Diversification</h1>
 		
 		Your investment portfolio:
@@ -82,6 +117,8 @@
 			}
 			%>
 		</table>
+		
+		<div id="piechart"></div>
 		
 		<p>
 			<strong><a href="http://localhost:8080/diversification-web-project/">Back</a></strong>

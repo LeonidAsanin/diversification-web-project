@@ -23,4 +23,9 @@
     <servlet-name>ProcessingServlet</servlet-name>
     <url-pattern>/Result</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/js/*</url-pattern>
+</servlet-mapping>
 </web-app>
