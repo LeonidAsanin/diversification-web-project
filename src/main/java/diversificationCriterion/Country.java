@@ -37,4 +37,8 @@ public enum Country {
     public int getIndex() {
         return index;
     }
+    
+    public boolean isDevelopedCountry() {
+    	return developedCountry;
+    }
 }

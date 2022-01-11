@@ -49,7 +49,7 @@
 				<%}
 				%>
 			</table>
-			<p><input type="submit" value="CALCULATE" id="submit"></p>
+			<p><input type="submit" value="CALCULATE" class="submit"></p>
 		</form>
 	</body>
 </html>

@@ -1,4 +1,5 @@
 body {
+	font-family: sans-serif;
     text-align:center;
 }
 
@@ -8,12 +9,22 @@ h1 {
 
 table {
 	margin: auto;
-	border: 1px solid black;
+	border-collapse: collapse;
+	border: 2px solid rgb(200,200,200);
 	border-radius: 5px;
+	letter-spacing: 1px;
 }
 
 th, td {
-	border: 1px solid black;
+	border: 1px solid rgb(190,190,190);
+}
+
+th {
+  background-color: rgb(235,235,235);
+}
+
+tfoot {
+  font-weight: bold;
 }
 
 .quantityInput {
@@ -22,19 +33,33 @@ th, td {
     width: 147px;
 }
 
-#submit {
+.submit {
+	margin: 35px;
     font-size: 20px;
     font-weight: bold;
-    width: 275px;
+    width: 300px;
 }
 
-#submit:hover {
+.submit:hover {
     transform: scale(1.05);
 }
 
-#piechart {
+.piechart {
 	margin: auto;
 	width: 500px;
 	height: 500px;
 }
+
+#selection {
+	font-size: 20px;
+}
+
+#extendedTable {
+	display: none;
+}
+
+#extendedPiechart {
+	display: none;
+}
+
 
