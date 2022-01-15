@@ -18,7 +18,7 @@ import java.net.URLConnection;
  * Thus, when the site structure is changed, then respective getter should be updated.
  *
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 public class PriceGetter {
@@ -121,6 +121,7 @@ public class PriceGetter {
             while ((infoString = bufferedReader.readLine()) != null) {
                 if (infoString.contains(requiredString)) {
                     stringFoundMarker = true;
+                    bufferedReader.readLine();//to skip one string
                     continue;
                 }
                 if (stringFoundMarker) {

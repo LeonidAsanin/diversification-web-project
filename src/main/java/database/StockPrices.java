@@ -13,7 +13,7 @@ import java.util.Map;
  * also includes {@link StockPrices#get(Ticker)} method to retrieve the price by ticker.
  *
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 public class StockPrices {

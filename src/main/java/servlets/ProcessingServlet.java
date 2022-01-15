@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet to process and calculate country diversification of user's investment portfolio.
  * 
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 public class ProcessingServlet extends HttpServlet {

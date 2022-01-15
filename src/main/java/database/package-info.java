@@ -6,7 +6,7 @@
  * <img src="{@docRoot}/resources/dependencies.png" alt="image">
  *
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 package database;

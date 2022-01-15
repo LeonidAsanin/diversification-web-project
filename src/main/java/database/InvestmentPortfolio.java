@@ -11,7 +11,7 @@ import java.util.Map;
  * Class that is supposed to calculate, retrieve and show user's investment portfolio.
  *
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 public class InvestmentPortfolio {

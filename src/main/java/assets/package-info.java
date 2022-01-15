@@ -3,7 +3,7 @@
  * which implements marker interface {@link assets.Ticker}
  *
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 package assets;

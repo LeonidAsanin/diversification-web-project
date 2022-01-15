@@ -7,7 +7,7 @@ import java.util.Objects;
  * Singleton class for connection to the remote database purposes.
  *
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.1
  */
 public class DatabaseConnection {

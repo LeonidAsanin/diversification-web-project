@@ -5,7 +5,7 @@ package utilities;
  * Utility class which is supposed to convert different values to a unified format.
  * 
  * @author lennardjones
- * @version 1.0
+ * @version 1.3
  * @since 1.0
  */
 public class Unifier {

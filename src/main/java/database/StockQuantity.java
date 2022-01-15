@@ -9,7 +9,7 @@ import java.util.Map;
  * Class that stores information about user's each stock quantity.
  *
  * @author lennardjones
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 public class StockQuantity {
