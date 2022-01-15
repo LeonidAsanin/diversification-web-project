@@ -22,20 +22,45 @@
 		Map<Country, Double> developedMarketMap = new LinkedHashMap<>();
 		Map<Country, Double> emergencyMarketMap = new LinkedHashMap<>();
 		
+		/* These maps include those countries whose own parts are greater than 1% */
+		Map<Country, Double> marketExcludeOther = new LinkedHashMap<>();
+		Map<Country, Double> developedMarketExcludeOther = new LinkedHashMap<>();
+		Map<Country, Double> emergencyMarketExcludeOther = new LinkedHashMap<>();
+		
 		double developedMarketSum = 0;
 		double emergencyMarketSum = 0;
+		
+		/* These fields include those countries whose own parts are less than 1% */
+		double otherMarketSum = 0;
+		double otherDevelopedMarketSum = 0;
+		double otherEmergencyMarketSum = 0;
 		
 		for (Map.Entry<Country, Double> entry : countryDiversification.getEntrySet()) {
 			Country country = entry.getKey();
 			Double shareRub = entry.getValue();
 			if (country.equals(Country.USA)) {
 				USAmap.put(country, shareRub);
+				marketExcludeOther.put(country, shareRub);
 			} else if (country.isDevelopedCountry()) {
 				developedMarketMap.put(country, shareRub);
 				developedMarketSum += shareRub;
+				if (shareRub / investmentPortfolio.getSum() < 0.01) {
+					otherMarketSum += shareRub;
+					otherDevelopedMarketSum += shareRub;
+				} else {
+					marketExcludeOther.put(country, shareRub);
+					developedMarketExcludeOther.put(country, shareRub);
+				}
 			} else {
 				emergencyMarketMap.put(country, shareRub);
 				emergencyMarketSum += shareRub;
+				if (shareRub / investmentPortfolio.getSum() < 0.01) {
+					otherMarketSum += shareRub;
+					otherEmergencyMarketSum += shareRub;
+				} else {
+					marketExcludeOther.put(country, shareRub);
+					emergencyMarketExcludeOther.put(country, shareRub);
+				}
 			}
 		}
 		%>
@@ -54,10 +79,11 @@
 		$(function() {
 			var standardData = [
 				<%
-				for (Map.Entry<Country, Double> entry : countryDiversification.getEntrySet()) {
+				for (Map.Entry<Country, Double> entry : marketExcludeOther.entrySet()) {
 					out.println("{ label: \"" + entry.getKey() + "\",  data: " + entry.getValue() + "},");
 				}
 				%>
+				{ label: "Other", data: "<%=otherMarketSum%>"}
 			];
 			var extendedData = [
 				<%
@@ -65,14 +91,16 @@
 					out.println("{ label: \"USA\",  data: " + USAmap.get(Country.USA) + "},");
 				}
 				if (!developedMarketMap.isEmpty()) {
-					for (Map.Entry<Country, Double> entry : developedMarketMap.entrySet()) {
+					for (Map.Entry<Country, Double> entry : developedMarketExcludeOther.entrySet()) {
 						out.println("{ label: \"" + entry.getKey() + "\",  data: " + entry.getValue() + "},");
 					}
+					out.println("{ label: \"Other\",  data: " + otherDevelopedMarketSum + "},");
 				}
 				if (!emergencyMarketMap.isEmpty()) {
-					for (Map.Entry<Country, Double> entry : emergencyMarketMap.entrySet()) {
+					for (Map.Entry<Country, Double> entry : emergencyMarketExcludeOther.entrySet()) {
 						out.println("{ label: \"" + entry.getKey() + "\",  data: " + entry.getValue() + "},");
 					}
+					out.println("{ label: \"Other\",  data: " + otherEmergencyMarketSum + "},");
 				}
 				%>
 			];
@@ -243,9 +271,10 @@
 			}
 			%>
 		</table>
-		
+		<br>
 		<div id="standardPiechart" class="piechart"></div>
 		<div id="extendedPiechart" class="piechart"></div>
+		<br>
 		
 		<form action="http://localhost:8080/diversification-web-project/">
 			<input type="submit" value="Back" class="submit">
