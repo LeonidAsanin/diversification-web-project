@@ -27,6 +27,11 @@
 		Map<Country, Double> developedMarketExcludeOther = new LinkedHashMap<>();
 		Map<Country, Double> emergencyMarketExcludeOther = new LinkedHashMap<>();
 		
+		/* These maps include those countries whose own parts are less than 1% */
+		Map<Country, Double> marketOther = new LinkedHashMap<>();
+		Map<Country, Double> developedMarketOther = new LinkedHashMap<>();
+		Map<Country, Double> emergencyMarketOther = new LinkedHashMap<>();
+		
 		double developedMarketSum = 0;
 		double emergencyMarketSum = 0;
 		
@@ -47,6 +52,8 @@
 				if (shareRub / investmentPortfolio.getSum() < 0.01) {
 					otherMarketSum += shareRub;
 					otherDevelopedMarketSum += shareRub;
+					marketOther.put(country, shareRub);
+					developedMarketOther.put(country, shareRub);
 				} else {
 					marketExcludeOther.put(country, shareRub);
 					developedMarketExcludeOther.put(country, shareRub);
@@ -57,10 +64,36 @@
 				if (shareRub / investmentPortfolio.getSum() < 0.01) {
 					otherMarketSum += shareRub;
 					otherEmergencyMarketSum += shareRub;
+					marketOther.put(country, shareRub);
+					emergencyMarketOther.put(country, shareRub);
 				} else {
 					marketExcludeOther.put(country, shareRub);
 					emergencyMarketExcludeOther.put(country, shareRub);
 				}
+			}
+		}
+		
+		/* If there is only 1 country in the other section then it puts into "excludeOther" map */
+		if (marketOther.size() == 1) {
+			for (Map.Entry<Country, Double> entry : marketOther.entrySet()) {
+				marketExcludeOther.put(entry.getKey(), entry.getValue());
+				otherMarketSum = 0;
+			}
+		}
+		if (developedMarketOther.size() == 1) {
+			for (Map.Entry<Country, Double> entry : developedMarketOther.entrySet()) {
+				developedMarketExcludeOther.put(entry.getKey(), entry.getValue());
+				developedMarketSum += entry.getValue();
+				otherMarketSum -= entry.getValue();
+				otherDevelopedMarketSum = 0;
+			}
+		}
+		if (emergencyMarketOther.size() == 1) {
+			for (Map.Entry<Country, Double> entry : emergencyMarketOther.entrySet()) {
+				emergencyMarketExcludeOther.put(entry.getKey(), entry.getValue());
+				emergencyMarketSum += entry.getValue();
+				otherMarketSum -= entry.getValue();
+				otherEmergencyMarketSum = 0;
 			}
 		}
 		%>
