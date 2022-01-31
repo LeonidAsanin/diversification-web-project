@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.util.Optional;
 
 import assets.FinExTicker;
@@ -22,6 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @since 1.0
  */
 public class ProcessingServlet extends HttpServlet {
+	@Serial
 	private static final long serialVersionUID = -3515658310223927361L;
 
 	@Override
@@ -60,14 +62,14 @@ public class ProcessingServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Tries to get stock quantity by Ticker (which user entered) from HttpRequest.
+	 * Tries to get stock quantity by ticker.
 	 * Gives an error response if the entered data is incorrect.
 	 * 
 	 * @param request To get entered data by user 
 	 * @param response To dispatch error message if data is incorrect
-	 * @param ticker 
+	 * @param ticker Ticker (which user entered) from HttpRequest
 	 * @return Optional<Integer> which may contain desired value
-	 * @throws IOException 
+	 * @throws IOException Can be thrown if getting PrintWriter from HttpServletResponse is failed
 	 */
 	private Optional<Integer> tryToGetStockQuantity(HttpServletRequest request, HttpServletResponse response, Ticker ticker) throws IOException {
 		Integer quantity = null;
@@ -94,6 +96,6 @@ public class ProcessingServlet extends HttpServlet {
 			out.close();
 		}
 		
-		return Optional.of(quantity);
+		return Optional.ofNullable(quantity);
 	}
 }

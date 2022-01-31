@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.util.concurrent.*;
 
 /**
@@ -19,17 +20,25 @@ import java.util.concurrent.*;
  * @since 1.0
  */
 public class InitialServlet extends HttpServlet {
+	@Serial
 	private static final long serialVersionUID = 4992357038668964371L;
 
+	private static ScheduledExecutorService executor;
+
 	@Override
-	public void init() throws ServletException {
-		var executor = Executors.newScheduledThreadPool(2);
-		executor.scheduleAtFixedRate(() -> StockPrices.updateAllAsSeparateThread(), 0, 1, TimeUnit.MINUTES);
-		executor.scheduleAtFixedRate(() -> CountryShares.getAllValuesFromDatabase(), 0, 1, TimeUnit.MINUTES);
+	public void init() {
+		executor = Executors.newScheduledThreadPool(2);
+		executor.scheduleAtFixedRate(StockPrices::updateAllAsSeparateThread, 0, 1, TimeUnit.MINUTES);
+		executor.scheduleAtFixedRate(CountryShares::getAllValuesFromDatabase, 0, 1, TimeUnit.MINUTES);
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("index.jsp");
+	}
+
+	@Override
+	public void destroy() {
+		executor.shutdown();
 	}
 }
