@@ -56,7 +56,7 @@ public class ProcessingServlet extends HttpServlet {
 				response.addCookie(cookie);
 			});
 		}
-		
+
 		request.setAttribute("StockQuantity", stockQuantity);
 		request.getRequestDispatcher("result-page.jsp").forward(request, response);
 	}
@@ -69,33 +69,18 @@ public class ProcessingServlet extends HttpServlet {
 	 * @param response To dispatch error message if data is incorrect
 	 * @param ticker Ticker (which user entered) from HttpRequest
 	 * @return Optional<Integer> which may contain desired value
-	 * @throws IOException Can be thrown if getting PrintWriter from HttpServletResponse is failed
 	 */
-	private Optional<Integer> tryToGetStockQuantity(HttpServletRequest request, HttpServletResponse response, Ticker ticker) throws IOException {
-		Integer quantity = null;
-		var out = response.getWriter();
-		
+	private Optional<Integer> tryToGetStockQuantity(HttpServletRequest request, HttpServletResponse response, Ticker ticker) {
+		int quantity;
+
 		try {
 			var parameter = request.getParameter(ticker.toString());
-			if (parameter.equals("")) parameter = "0";
+			if (parameter == null || parameter.equals("")) parameter = "0";
 			quantity = Integer.parseInt(parameter);
-			if (quantity < 0) {
-				out.println("<strong>Error while entering ticker's quantity!");
-				out.println("<br>Please, enter a positive numbers</strong>");
-				out.println("<p>");
-					out.println("<strong><a href=\"http://localhost:8080/diversification-web-project/\">Back</a></strong>");
-				out.println("</p>");
-				out.close();
-            }
 		} catch (NumberFormatException e) {
-			out.println("<strong>Error while entering ticker's quantity!<strong>");
-			out.println("<br>Please, enter a proper integer numbers</strong>");
-			out.println("<p>");
-				out.println("<strong><a href=\"http://localhost:8080/diversification-web-project/\">Back</a></strong>");
-			out.println("</p>");
-			out.close();
+			quantity = 0;
 		}
 		
-		return Optional.ofNullable(quantity);
+		return Optional.of(quantity);
 	}
 }

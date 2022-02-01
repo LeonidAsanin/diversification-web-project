@@ -36,14 +36,14 @@
 				for (Ticker ticker : FinExTicker.values()) {%>
 				<tr>
 					<td><%=ticker%></td>
-					<td><input type="number" min="0" name="<%=ticker%>" placeholder="0" value="<%=tickerQuantityMap.getOrDefault(ticker.toString(), "") %>" class="quantityInput"></td>
+					<td><input type="number" min="0" max="2147483647" name="<%=ticker%>" placeholder="0" value="<%=tickerQuantityMap.getOrDefault(ticker.toString(), "") %>" class="quantityInput"></td>
 					<td align="right"><%=StockPrices.get(ticker)%></td>
 				</tr>
 				<%}
 				for (Ticker ticker : VTBTicker.values()) {%>
 				<tr>
 					<td><%=ticker%></td>
-					<td><input type="number" min="0" Enteringname="<%=ticker%>" placeholder="0" value="<%=tickerQuantityMap.getOrDefault(ticker.toString(), "") %>" class="quantityInput"></td>
+					<td><input type="number" min="0" max="2147483647" name="<%=ticker%>" placeholder="0" value="<%=tickerQuantityMap.getOrDefault(ticker.toString(), "") %>" class="quantityInput"></td>
 					<td align="right"><%=StockPrices.get(ticker)%></td>
 				</tr>
 				<%}

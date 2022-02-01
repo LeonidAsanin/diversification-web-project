@@ -6,7 +6,7 @@ import price.PriceGetter;
 
 public class PriceGetterTest {
 
-    @Test(timeout = 60_000L)
+    @Test(timeout = 120_000L)
     public void shouldGetAllValues() {
         for (var ticker : FinExTicker.values()) {
             try {
