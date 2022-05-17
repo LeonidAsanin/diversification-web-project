@@ -4,12 +4,11 @@ package assets;
  * Enumeration of VTB funds tickers.
  *
  * @author lennardjones
- * @version 1.3
+ * @version 1.3.1
  * @since 1.0
  */
 public enum VTBTicker implements Ticker {
-    VTBA("vtbfam"), VTBB("vtbrcbsb"), VTBE("vtbfars"), VTBG("vtbfzb"), VTBH("vtbfacd"),
-    VTBM("vtbfl"), VTBU("vtbfcresb"), VTBX("vtbfimb"), VTBY("vtbfevesm");
+     VTBB("vtbrcbsb"), VTBG("vtbfzb"), VTBM("vtbfl"), VTBX("vtbfimb");
 
     /**
      * To visit the official site for the specific fund we need its page name:<br>

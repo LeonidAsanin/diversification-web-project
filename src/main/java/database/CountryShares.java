@@ -38,7 +38,7 @@ import java.util.*;
  * If connection has not been established or another exception occurred then default values are used.
  *
  * @author lennardjones
- * @version 1.3
+ * @version 1.3.1
  * @since 1.0
  */
 public class CountryShares {
@@ -250,38 +250,12 @@ public class CountryShares {
 
         coefficientArray = new Double[arraySize];
         Arrays.fill(coefficientArray, 0.);
-        coefficientArray[Country.USA.getIndex()] = 1.;
-        COEFFICIENT_MAP.put(VTBTicker.VTBA, coefficientArray);
-
-        coefficientArray = new Double[arraySize];
-        Arrays.fill(coefficientArray, 0.);
         coefficientArray[Country.Russia.getIndex()] = 1.;
         COEFFICIENT_MAP.put(VTBTicker.VTBB, coefficientArray);
 
         coefficientArray = new Double[arraySize];
         Arrays.fill(coefficientArray, 0.);
-        coefficientArray[Country.China.getIndex()] = .3101;
-        coefficientArray[Country.Taiwan.getIndex()] = .1616;
-        coefficientArray[Country.India.getIndex()] = .1318;
-        coefficientArray[Country.South_Korea.getIndex()] = .1257;
-        coefficientArray[Country.Brazil.getIndex()] = .0369;
-        coefficientArray[Country.Russia.getIndex()] = .0344;
-        coefficientArray[Country.South_Africa.getIndex()] = .0317;
-        coefficientArray[Country.Saudi_Arabia.getIndex()] = .0293;
-        coefficientArray[Country.Thailand.getIndex()] = .0192;
-        coefficientArray[Country.Mexico.getIndex()] = .0181;
-        coefficientArray[Country.Malaysia.getIndex()] = .015;
-        coefficientArray[Country.Indonesia.getIndex()] = .0145;
-        COEFFICIENT_MAP.put(VTBTicker.VTBE, coefficientArray);//add
-
-        coefficientArray = new Double[arraySize];
-        Arrays.fill(coefficientArray, 0.);
         COEFFICIENT_MAP.put(VTBTicker.VTBG, coefficientArray);
-
-        coefficientArray = new Double[arraySize];
-        Arrays.fill(coefficientArray, 0.);
-        coefficientArray[Country.USA.getIndex()] = 1.;
-        COEFFICIENT_MAP.put(VTBTicker.VTBH, coefficientArray);
 
         coefficientArray = new Double[arraySize];
         Arrays.fill(coefficientArray, 0.);
@@ -291,31 +265,6 @@ public class CountryShares {
         coefficientArray = new Double[arraySize];
         Arrays.fill(coefficientArray, 0.);
         coefficientArray[Country.Russia.getIndex()] = 1.;
-        COEFFICIENT_MAP.put(VTBTicker.VTBU, coefficientArray);
-
-        coefficientArray = new Double[arraySize];
-        Arrays.fill(coefficientArray, 0.);
-        coefficientArray[Country.Russia.getIndex()] = 1.;
         COEFFICIENT_MAP.put(VTBTicker.VTBX, coefficientArray);
-
-        coefficientArray = new Double[arraySize];
-        Arrays.fill(coefficientArray, 0.);
-        coefficientArray[Country.Russia.getIndex()] = .5;
-        coefficientArray[Country.Mexico.getIndex()] = .1;
-        coefficientArray[Country.Indonesia.getIndex()] = .06;
-        coefficientArray[Country.Greece.getIndex()] = .05;
-        coefficientArray[Country.Hungary.getIndex()] = .046;
-        coefficientArray[Country.Chile.getIndex()] = .046;
-        coefficientArray[Country.China.getIndex()] = .042;
-        coefficientArray[Country.Turkey.getIndex()] = .029;
-        coefficientArray[Country.Czech_Republic.getIndex()] = .025;
-        coefficientArray[Country.Egypt.getIndex()] = .024;
-        coefficientArray[Country.Saudi_Arabia.getIndex()] = .019;
-        coefficientArray[Country.Peru.getIndex()] = .015;
-        coefficientArray[Country.UAE.getIndex()] = .013;
-        coefficientArray[Country.Poland.getIndex()] = .01;
-        coefficientArray[Country.Colombia.getIndex()] = .01;
-        coefficientArray[Country.Philippines.getIndex()] = .005;
-        COEFFICIENT_MAP.put(VTBTicker.VTBY, coefficientArray);
     }
 }

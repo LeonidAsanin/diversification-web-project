@@ -14,8 +14,8 @@
 		<style><%@include file="css/style.css"%></style>
 		
 		<%
-		StockQuantity stockquantity = (StockQuantity) request.getAttribute("StockQuantity");
-		InvestmentPortfolio investmentPortfolio = new InvestmentPortfolio(stockquantity);
+		StockQuantity stockQuantity = (StockQuantity) request.getAttribute("StockQuantity");
+		InvestmentPortfolio investmentPortfolio = new InvestmentPortfolio(stockQuantity);
 		CountryDiversification countryDiversification = new CountryDiversification(investmentPortfolio);
 		
 		Map<Country, Double> USAmap = new LinkedHashMap<>();
@@ -162,7 +162,7 @@
 		});
 		</script>
 		<script type="text/javascript">
-			function selectTableToShow(elementId1, elementId2, selectId) {
+			function selectViewToShow(elementId1, elementId2, selectId) {
 				document.getElementById(elementId1).style.display = selectId.value == 1 ? 'table' : 'none'; 
 				document.getElementById(elementId2).style.display = selectId.value == 1 ? 'none' : 'table'; 
 			}
@@ -182,11 +182,11 @@
 			</tr>
 			<% 
 			for (Ticker ticker : FinExTicker.values()) {
-					if (stockquantity.get(ticker) > 0) {
+					if (stockQuantity.get(ticker) > 0) {
 						%>
 						<tr>
 							<td><%=ticker%></td>
-							<td align="right"><%=stockquantity.get(ticker)%></td>
+							<td align="right"><%=stockQuantity.get(ticker)%></td>
 							<td align="right"><%=StockPrices.get(ticker)%></td>
 							<td align="right"><%=Unifier.doubleToMoney(investmentPortfolio.getTotalPriceByTicker(ticker))%></td>
 						</tr>
@@ -194,11 +194,11 @@
 					}
 				}
 				for (Ticker ticker : VTBTicker.values()) {
-					if (stockquantity.get(ticker) > 0) {
+					if (stockQuantity.get(ticker) > 0) {
 						%>
 						<tr>
 							<td><%=ticker%></td>
-							<td align="right"><%=stockquantity.get(ticker)%></td>
+							<td align="right"><%=stockQuantity.get(ticker)%></td>
 							<td align="right"><%=StockPrices.get(ticker)%></td>
 							<td align="right"><%=Unifier.doubleToMoney(investmentPortfolio.getTotalPriceByTicker(ticker))%></td>
 						</tr>
@@ -218,7 +218,7 @@
 		
 		Diversification you have:
 		
-		<select id="selection" onchange="selectTableToShow('standardTable', 'extendedTable', this); selectTableToShow('standardPiechart', 'extendedPiechart', this)">
+		<select id="selection" onchange="selectViewToShow('standardTable', 'extendedTable', this); selectViewToShow('standardPiechart', 'extendedPiechart', this)">
 			<option value="1">Standard view</option>
 			<option value="2">Extended view</option>
 		</select>
@@ -304,10 +304,11 @@
 			}
 			%>
 		</table>
-		<br>
-		<div id="standardPiechart" class="piechart"></div>
-		<div id="extendedPiechart" class="piechart"></div>
-		<br>
+
+		<p>
+		    <div id="standardPiechart" class="piechart"></div>
+		    <div id="extendedPiechart" class="piechart"></div>
+		</p>
 		
 		<form action="http://localhost:8080/diversification-web-project/">
 			<input type="submit" value="Back" class="submit">
